@@ -1,0 +1,45 @@
+---
+# tasks file for vsftpd
+
+
+  - name: ===========install apache web server============
+    yum: name=httpd state=latest
+  
+  - name: ===========start and enable apache===========
+    service: name=httpd state=started enabled=yes 
+ 
+  - name: ===========install firewwall===========
+    yum: name=firewalld state=latest
+
+  - name: ===========start and enable firewall===========
+    yum: name=firewalld state=latest 
+
+  - name: ===========Creating index.html===========
+    template: src=index.html dest={{ destin_folder_website }}/index.html mode=0555
+        
+   
+  - name: ===========enable 80===========
+    firewalld:
+        zone: public
+        port: 80/tcp
+        permanent: true
+        state: enabled
+    
+  - name: ===========install vsftpd==========
+    yum: name=vsftpd state=latest
+
+  - name: ===========enable vsftpd==========
+    service: name=vsftpd state=started enabled=yes
+
+  - name: ===========configuring vsftpd file===========
+    template: src=vsftpd.conf dest={{ destin_folder_vsftpd_conf }}/vsftpd.conf mode=0555
+  
+  - name: ===========enable 21========== 
+    firewalld:
+        zone: public
+        port: 21/tcp
+        permanent: true
+        state: enabled
+
+
+  

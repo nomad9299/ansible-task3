@@ -1,0 +1,4 @@
+---
+# defaults file for vsftpd
+destin_folder_website: /var/www/html
+destin_folder_vsftpd_conf: /etc/vsftpd/

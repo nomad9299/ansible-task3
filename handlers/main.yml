@@ -1,0 +1,8 @@
+---
+# handlers file for vsftpd
+
+- name: Restart Apache ReaHat
+  service: name=httpd state=restarted
+
+- name: Restart vsftpd
+  service: name=httpd state=restarted
